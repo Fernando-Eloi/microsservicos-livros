@@ -26,5 +26,5 @@ jobs:
           java-version: '21'
 
       - name: Build Eureka Naming Server Docker Image
-        working-directory: ./microsservico/naming-server/naming-server
+        working-directory: microsservico/naming-server/naming-server
         run: mvn spring-boot:build-image -DskipTests
