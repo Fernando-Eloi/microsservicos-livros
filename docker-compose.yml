@@ -14,6 +14,9 @@ services:
     ports:
       - 8761:8761
     restart: always
+    build:
+      context: ./naming-server/naming-server
+      dockerfile: Dockerfile
     depends_on:
       - zipkin-server
     networks:
@@ -24,6 +27,9 @@ services:
     ports:
       - 8765:8765
     restart: always
+    build:
+      context: ./api-gateway/api-gateway
+      dockerfile: Dockerfile
     depends_on:
       - zipkin-server
       - naming-server
@@ -65,7 +71,7 @@ services:
     image: fernandodelima/exchange-service:0.0.1-SNAPSHOT
     restart: always
     build:
-      context: ./exchange-service
+      context: ./exchange-service/exchange-service
       dockerfile: Dockerfile
     environment:
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
@@ -86,7 +92,7 @@ services:
     image: fernandodelima/book-service:0.0.1-SNAPSHOT
     restart: always
     build:
-      context: ./book-service
+      context: ./book-service/book-service
       dockerfile: Dockerfile
     environment:
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
