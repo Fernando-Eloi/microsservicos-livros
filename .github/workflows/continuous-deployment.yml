@@ -46,10 +46,10 @@ jobs:
 
       - name: Tag Docker Images
         run: |
-          docker tag naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME}}/naming-server:latest
-          docker tag naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME}}/naming-server:${{github.run_id}}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/naming-server:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/naming-server:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/naming-server:${{ github.run_id }}
 
       - name: Push Docker Images to Docker Hub
         run: |
-          docker push ${{secrets.DOCKER_USERNAME}}/naming-server:latest
-          docker push ${{secrets.DOCKER_USERNAME}}/naming-server:${{github.run_id}}
+          docker push ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/naming-server:${{ github.run_id }}
