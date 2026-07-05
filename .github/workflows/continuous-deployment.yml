@@ -45,11 +45,15 @@ jobs:
         run: docker compose build
 
       - name: Tag Docker Images
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          docker tag fernandodelima/naming-server:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
-          docker tag fernandodelima/naming-server:0.0.1-SNAPSHOT ${{ secrets.DOCKER_USERNAME }}/naming-server:${{ github.run_id }}
+          docker tag $DOCKER_USER/naming-server:0.0.1-SNAPSHOT $DOCKER_USER/naming-server:latest
+          docker tag $DOCKER_USER/naming-server:0.0.1-SNAPSHOT $DOCKER_USER/naming-server:${{ github.run_id }}
 
       - name: Push Docker Images to Docker Hub
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/naming-server:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/naming-server:${{ github.run_id }}
+          docker push $DOCKER_USER/naming-server:latest
+          docker push $DOCKER_USER/naming-server:${{ github.run_id }}
