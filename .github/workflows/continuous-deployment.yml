@@ -45,11 +45,11 @@ jobs:
         run: docker compose build
 
       - name: Tag Docker Images
-        run:
+        run: |
           docker tag ${{secrets.DOCKER_USERNAME }}/naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME }}/naming-server:latest
-          docker tag ${{secrets.DOCKER_USERNAME }}/naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME }}/naming-server:${{github.RUN_ID}}
+          docker tag ${{secrets.DOCKER_USERNAME }}/naming-server:0.0.1-SNAPSHOT ${{secrets.DOCKER_USERNAME }}/naming-server:${{github.run_id}}
 
       - name: Push Docker Images to Docker Hub
-        run:
+        run: |
           docker push ${{secrets.DOCKER_USERNAME }}/naming-server:latest
-          docker push ${{secrets.DOCKER_USERNAME }}/naming-server:${{github.RUN_ID}}
+          docker push ${{secrets.DOCKER_USERNAME }}/naming-server:${{github.run_id}}
