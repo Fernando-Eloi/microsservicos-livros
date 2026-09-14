@@ -1,4 +1,4 @@
-# docker run -p 8761:8761 fernandodelima/naming-server:0.0.1-SNAPSHOT
+# docker run -p 8761:8761 ------------/naming-server:0.0.1-SNAPSHOT
 
 services:
   zipkin-server:
@@ -23,7 +23,7 @@ services:
       - fernando-network
 
   api-gateway:
-    image: fernandodelima/api-gateway:0.0.1-SNAPSHOT
+    image:-------/api-gateway:0.0.1-SNAPSHOT
     ports:
       - 8765:8765
     restart: always
@@ -46,10 +46,10 @@ services:
     restart: always
     environment:
       TZ: America/Pernambuco
-      MYSQL_ROOT_PASSWORD: fernando
-      MYSQL_USER: docker 
-      MYSQL_PASSWORD: fernando 
-      MYSQL_DATABASE: book_service
+      MYSQL_ROOT_PASSWORD: -------
+      MYSQL_USER: ------- 
+      MYSQL_PASSWORD:--------
+      MYSQL_DATABASE: ---------
     networks:
       - fernando-network
 
@@ -60,25 +60,25 @@ services:
     restart: always
     environment:
       TZ: America/Pernambuco
-      MYSQL_ROOT_PASSWORD: fernando
-      MYSQL_USER: docker
-      MYSQL_PASSWORD: fernando
-      MYSQL_DATABASE: exchange_service
+      MYSQL_ROOT_PASSWORD: --------
+      MYSQL_USER: --------
+      MYSQL_PASSWORD: ----------
+      MYSQL_DATABASE: ----------
     networks:
       - fernando-network
 
   exchange-service:
-    image: fernandodelima/exchange-service:0.0.1-SNAPSHOT
+    image: ----------/exchange-service:0.0.1-SNAPSHOT
     restart: always
     build:
       context: ./exchange-service/exchange-service
       dockerfile: Dockerfile
     environment:
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: -----------
       SPRING_DATASOURCE_URL: jdbc:mysql://exchange-db:3306/exchange_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: fernando
+      SPRING_DATASOURCE_USERNAME: ----------
+      SPRING_DATASOURCE_PASSWORD:-------
     ports:
       - 8000:8000
     depends_on:
@@ -89,17 +89,17 @@ services:
       - fernando-network
 
   book-service:
-    image: fernandodelima/book-service:0.0.1-SNAPSHOT
+    image: ---------/book-service:0.0.1-SNAPSHOT
     restart: always
     build:
       context: ./book-service/book-service
       dockerfile: Dockerfile
     environment:
       SPRING_ZIPKIN_BASEURL: http://zipkin-server:9411
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://naming-server:8761/eureka
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: ---------
       SPRING_DATASOURCE_URL: jdbc:mysql://book-db:3306/book_service?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: fernando
+      SPRING_DATASOURCE_USERNAME: ---------
+      SPRING_DATASOURCE_PASSWORD: ---------
     ports:
       - 8100:8100
     depends_on:
